@@ -2,15 +2,26 @@ const todoList = JSON.parse(localStorage.getItem("todoList")) || [{}];
 
 renderTodoList();
 
+function crossText(index) {
+  document.querySelector(`.name-${index}`).classList.add("cross-text");
+  document.querySelector(`.date-${index}`).classList.add("cross-text");
+}
+
+function unCrossText(index) {
+  document.querySelector(`.name-${index}`).classList.remove("cross-text");
+  document.querySelector(`.date-${index}`).classList.remove("cross-text");
+}
+
 function renderTodoList() {
   let todoListHTML = "";
 
-  todoList.forEach((todoObject) => {
+  todoList.forEach((todoObject, index) => {
     const { name, dueDate } = todoObject;
     const html = `
-    <div>${name}</div>
-    <div>${dueDate}</div>
+    <div class="name-${index}">${name}</div>
+    <div class="date-${index}">${dueDate}</div>
     <button class="delete-todo-button js-delete-todo-button">Delete</button>
+    <input type="checkbox" class="checkbox-done js-checkbox-done">
     `;
     todoListHTML += html;
   });
@@ -26,6 +37,16 @@ function renderTodoList() {
         saveToStorage();
       });
     });
+
+  document.querySelectorAll(".js-checkbox-done").forEach((checkbox, index) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        crossText(index);
+      } else {
+        unCrossText(index);
+      }
+    });
+  });
 }
 
 document.querySelector(".js-add-todo-button").addEventListener("click", () => {
