@@ -44,6 +44,7 @@ function renderTodoList() {
     .querySelectorAll(".js-delete-todo-button")
     .forEach((deleteButton, index) => {
       deleteButton.addEventListener("click", () => {
+        localStorage.removeItem(`checkbox-${index}`);
         todoList.splice(index, 1);
         renderTodoList();
         saveToStorage();
