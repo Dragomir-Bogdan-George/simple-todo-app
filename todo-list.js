@@ -7,7 +7,6 @@ function crossText(index) {
   document.querySelector(`.date-${index}`).classList.add("cross-text");
 
   localStorage.setItem(`checkbox-${index}`, "checked");
-  localStorage.setItem(`cross-${index}`, "crossed");
 }
 
 function unCrossText(index) {
@@ -15,7 +14,6 @@ function unCrossText(index) {
   document.querySelector(`.date-${index}`).classList.remove("cross-text");
 
   localStorage.setItem(`checkbox-${index}`, "unchecked");
-  localStorage.setItem(`cross-${index}`, "uncrossed");
 }
 
 function renderTodoList() {
@@ -24,13 +22,13 @@ function renderTodoList() {
   todoList.forEach((todoObject, index) => {
     const { name, dueDate } = todoObject;
     const isChecked = localStorage.getItem(`checkbox-${index}`);
-    const isCrossed = localStorage.getItem(`cross-${index}`);
+
     const html = `
     <div class="name-${index} ${
-      isCrossed === "crossed" ? "cross-text" : ""
+      isChecked === "checked" ? "cross-text" : ""
     }">${name}</div>
     <div class="date-${index} ${
-      isCrossed === "crossed" ? "cross-text" : ""
+      isChecked === "checked" ? "cross-text" : ""
     }">${dueDate}</div>
     <button class="delete-todo-button js-delete-todo-button">Delete</button>
     <input type="checkbox" class="checkbox-done js-checkbox-done" ${
