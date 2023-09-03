@@ -1,6 +1,16 @@
 const todoList = JSON.parse(localStorage.getItem("todoList")) || [{}];
 
+showSortButton();
+
 renderTodoList();
+
+function showSortButton() {
+  if (todoList.length > 0) {
+    document.querySelector(".sort-button").classList.add("sort-state");
+  } else {
+    document.querySelector(".sort-button").classList.remove("sort-state");
+  }
+}
 
 function crossText(index) {
   document.querySelector(`.name-${index}`).classList.add("cross-text");
@@ -46,6 +56,7 @@ function renderTodoList() {
       deleteButton.addEventListener("click", () => {
         localStorage.removeItem(`checkbox-${index}`);
         todoList.splice(index, 1);
+        showSortButton();
         renderTodoList();
         saveToStorage();
       });
@@ -80,6 +91,8 @@ function addTodo() {
       name,
       dueDate,
     });
+
+    showSortButton();
 
     inputElement.value = "";
 
