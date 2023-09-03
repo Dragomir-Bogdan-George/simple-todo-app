@@ -74,15 +74,19 @@ function addTodo() {
   const dueDate =
     dateInputElement.value !== "" ? dateInputElement.value : "No deadline";
 
-  todoList.push({
-    name,
-    dueDate,
-  });
+  if (name !== "") {
+    todoList.push({
+      name,
+      dueDate,
+    });
 
-  inputElement.value = "";
+    inputElement.value = "";
 
-  renderTodoList();
-  saveToStorage();
+    renderTodoList();
+    saveToStorage();
+  } else {
+    alert("Please give a name for the activity!");
+  }
 }
 
 function saveToStorage() {
