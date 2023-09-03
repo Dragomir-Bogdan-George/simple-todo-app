@@ -71,7 +71,8 @@ function addTodo() {
   const name = inputElement.value;
 
   const dateInputElement = document.querySelector(".js-due-date-input");
-  const dueDate = dateInputElement.value;
+  const dueDate =
+    dateInputElement.value !== "" ? dateInputElement.value : "No deadline";
 
   todoList.push({
     name,
