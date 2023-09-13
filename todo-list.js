@@ -7,8 +7,10 @@ renderTodoList();
 function showSortButton() {
   if (todoList.length > 0) {
     document.querySelector(".sort-button").classList.add("sort-state");
+    document.querySelector(".sort-button-date").classList.add("sort-state");
   } else {
     document.querySelector(".sort-button").classList.remove("sort-state");
+    document.querySelector(".sort-button-date").classList.remove("sort-state");
   }
 }
 
