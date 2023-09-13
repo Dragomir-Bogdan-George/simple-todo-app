@@ -16,6 +16,7 @@ body {
   column-gap: 10px;
   row-gap: 10px;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .todo-input-grid {
@@ -87,4 +88,26 @@ button:hover {
 
 button:active {
   transform: scale(100%) rotate(0deg);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.activities-text {
+  border: 1px solid green;
+  margin-left: 5px;
+  font-family: Arial;
+  font-size: 16px;
+}
+
+.generate-activity-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text-without-activities {
 }
