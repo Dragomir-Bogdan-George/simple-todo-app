@@ -76,3 +76,11 @@ body {
 div {
   border: 1px solid rebeccapurple;
 }
+
+button {
+  transition: transform 0.3s;
+}
+
+button:hover {
+  transform: scale(110%) rotate(-2deg);
+}
