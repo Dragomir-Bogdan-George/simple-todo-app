@@ -7,10 +7,14 @@ renderTodoList();
 function showSortButton() {
   if (todoList.length > 0) {
     document.querySelector(".sort-button").classList.add("sort-state");
-    document.querySelector(".sort-button-date").classList.add("sort-state");
+    document
+      .querySelector(".sort-button-date")
+      .classList.add("sort-state-date");
   } else {
     document.querySelector(".sort-button").classList.remove("sort-state");
-    document.querySelector(".sort-button-date").classList.remove("sort-state");
+    document
+      .querySelector(".sort-button-date")
+      .classList.remove("sort-state-date");
   }
 }
 
@@ -48,13 +52,46 @@ function sortByName() {
   for (let iteration = 1; iteration <= todoList.length; iteration++) {
     for (let index = 0; index < todoList.length - 1; index++) {
       if (todoList[index].name > todoList[index + 1].name) {
-        holdProperty = todoList[index].name;
-        todoList[index].name = todoList[index + 1].name;
-        todoList[index + 1].name = holdProperty;
+        holdProperty = todoList[index];
+        todoList[index] = todoList[index + 1];
+        todoList[index + 1] = holdProperty;
       }
     }
   }
   renderTodoList();
+}
+
+function orderNoDeadlines() {
+  for (let index = 0; index < todoList.length; index++) {
+    if (todoList[index].dueDate === "No deadline") {
+      todoList.push({
+        name: todoList[index].name,
+        dueDate: todoList[index].dueDate,
+      });
+      todoList.splice(index, 1);
+    }
+  }
+  renderTodoList();
+}
+
+function sortDates() {
+  let holdProperty;
+
+  for (let iteration = 1; iteration <= todoList.length; iteration++) {
+    for (let index = 0; index < todoList.length - 1; index++) {
+      if (todoList[index].dueDate > todoList[index + 1].dueDate) {
+        holdProperty = todoList[index];
+        todoList[index] = todoList[index + 1];
+        todoList[index + 1] = holdProperty;
+      }
+    }
+  }
+  renderTodoList();
+}
+
+function sortByDate() {
+  orderNoDeadlines();
+  sortDates();
 }
 
 function crossRow() {
@@ -133,4 +170,8 @@ document.querySelector(".js-add-todo-button").addEventListener("click", () => {
 
 document.querySelector(".js-sort-button").addEventListener("click", () => {
   sortByName();
+});
+
+document.querySelector(".sort-button-date").addEventListener("click", () => {
+  sortByDate();
 });
