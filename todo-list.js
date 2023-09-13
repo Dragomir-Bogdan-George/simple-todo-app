@@ -26,6 +26,47 @@ function unCrossText(index) {
   localStorage.setItem(`checkbox-${index}`, "unchecked");
 }
 
+function deleteTodo() {
+  document
+    .querySelectorAll(".js-delete-todo-button")
+    .forEach((deleteButton, index) => {
+      deleteButton.addEventListener("click", () => {
+        todoList.splice(index, 1);
+        localStorage.removeItem(`checkbox-${index}`);
+        showSortButton();
+        renderTodoList();
+        saveToStorage();
+      });
+    });
+}
+
+function sortByName() {
+  let holdProperty;
+
+  for (let iteration = 1; iteration <= todoList.length; iteration++) {
+    for (let index = 0; index < todoList.length - 1; index++) {
+      if (todoList[index].name > todoList[index + 1].name) {
+        holdProperty = todoList[index].name;
+        todoList[index].name = todoList[index + 1].name;
+        todoList[index + 1].name = holdProperty;
+      }
+    }
+  }
+  renderTodoList();
+}
+
+function crossRow() {
+  document.querySelectorAll(".js-checkbox-done").forEach((checkbox, index) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        crossText(index);
+      } else {
+        unCrossText(index);
+      }
+    });
+  });
+}
+
 function renderTodoList() {
   let todoListHTML = "";
 
@@ -50,32 +91,9 @@ function renderTodoList() {
 
   document.querySelector(".js-todo-list").innerHTML = todoListHTML;
 
-  document
-    .querySelectorAll(".js-delete-todo-button")
-    .forEach((deleteButton, index) => {
-      deleteButton.addEventListener("click", () => {
-        localStorage.removeItem(`checkbox-${index}`);
-        todoList.splice(index, 1);
-        showSortButton();
-        renderTodoList();
-        saveToStorage();
-      });
-    });
-
-  document.querySelectorAll(".js-checkbox-done").forEach((checkbox, index) => {
-    checkbox.addEventListener("change", () => {
-      if (checkbox.checked) {
-        crossText(index);
-      } else {
-        unCrossText(index);
-      }
-    });
-  });
+  deleteTodo();
+  crossRow();
 }
-
-document.querySelector(".js-add-todo-button").addEventListener("click", () => {
-  addTodo();
-});
 
 function addTodo() {
   const inputElement = document.querySelector(".js-name-input");
@@ -106,3 +124,11 @@ function addTodo() {
 function saveToStorage() {
   localStorage.setItem("todoList", JSON.stringify(todoList));
 }
+
+document.querySelector(".js-add-todo-button").addEventListener("click", () => {
+  addTodo();
+});
+
+document.querySelector(".js-sort-button").addEventListener("click", () => {
+  sortByName();
+});

@@ -58,8 +58,16 @@ body {
 }
 
 .sort-state {
-  display: inline;
+  display: inline-block;
   background-color: fuchsia;
   border: none;
-  border-radius: 40px;
+  border-radius: 20px;
+}
+
+div {
+  border: 1px solid rebeccapurple;
+}
+
+.initial-state-sort {
+  display: none;
 }
