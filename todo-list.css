@@ -84,3 +84,7 @@ button {
 button:hover {
   transform: scale(110%) rotate(-2deg);
 }
+
+button:active {
+  transform: scale(100%) rotate(0deg);
+}
