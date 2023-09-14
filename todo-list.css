@@ -110,4 +110,97 @@ button:active {
 }
 
 .text-without-activities {
+  font-family: Roboto, Arial;
+  font-size: 20px;
+  font-weight: bold;
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+.button-and-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.generate-activity-button {
+  background-color: rgb(46, 101, 252);
+  color: white;
+  font-family: Roboto, Arial;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 10px;
+}
+
+.label {
+  font-family: Roboto, Arial;
+  font-weight: bold;
+  margin-left: 10px;
+  display: none;
+}
+
+.add-text-list {
+  margin-top: 10px;
+  font-family: Roboto, Arial;
+  font-size: 20px;
+  font-weight: bold;
+  height: 25px;
+  width: 410px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.yes-button,
+.no-button {
+  font-family: Roboto, Arial;
+  background-color: rgb(37, 248, 248);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 15px;
+  cursor: pointer;
+  width: 100px;
+  transition: transform 0.3s;
+  margin-right: 5px;
+  display: none;
+}
+
+.yes-button:hover,
+.no-button:hover {
+  transform: scale(110%) rotate(-10deg);
+}
+
+.yes-button:active,
+.no-button:active {
+  transform: scale(100%) rotate(0deg);
+}
+
+.date-of-activity {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  display: none;
+}
+
+.date-add {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  align-items: center;
+  display: none;
+}
+
+.input-date-addition {
+  font-size: 15px;
+  padding: 6px;
+}
+
+.add-to-list-button {
+  font-size: 15px;
+  background-color: rgb(255, 174, 0);
+  border: none;
+  border-radius: 25px;
+  height: 40px;
+  width: 100px;
+  margin-left: 10px;
 }
