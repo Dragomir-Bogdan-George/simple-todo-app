@@ -51,7 +51,10 @@ function sortByName() {
 
   for (let iteration = 1; iteration <= todoList.length; iteration++) {
     for (let index = 0; index < todoList.length - 1; index++) {
-      if (todoList[index].name > todoList[index + 1].name) {
+      if (
+        todoList[index].name.toLowerCase() >
+        todoList[index + 1].name.toLowerCase()
+      ) {
         holdProperty = todoList[index];
         todoList[index] = todoList[index + 1];
         todoList[index + 1] = holdProperty;
@@ -164,6 +167,14 @@ function saveToStorage() {
   localStorage.setItem("todoList", JSON.stringify(todoList));
 }
 
+async function getActivity() {
+  const response = await fetch("https://www.boredapi.com/api/activity/");
+  const data = await response.json();
+  const { activity } = data;
+
+  return activity;
+}
+
 document.querySelector(".js-add-todo-button").addEventListener("click", () => {
   addTodo();
 });
@@ -174,4 +185,73 @@ document.querySelector(".js-sort-button").addEventListener("click", () => {
 
 document.querySelector(".sort-button-date").addEventListener("click", () => {
   sortByDate();
+});
+
+document.querySelector(".no-button").addEventListener("click", () => {
+  document.querySelector(".label").classList.remove("label-state");
+  document
+    .querySelector(".add-text-list")
+    .classList.remove("add-text-list-state");
+  document.querySelector(".yes-button").classList.remove("yes-button-state");
+  document.querySelector(".no-button").classList.remove("no-button-state");
+
+  document
+    .querySelector(".date-of-activity")
+    .classList.remove("date-of-activity-state");
+  document
+    .querySelector(".input-date-addition")
+    .classList.remove("input-date-addition-state");
+  document
+    .querySelector(".add-to-list-button")
+    .classList.remove("add-to-list-button-state");
+});
+
+document.querySelector(".yes-button").addEventListener("click", () => {
+  document
+    .querySelector(".date-of-activity")
+    .classList.add("date-of-activity-state");
+
+  document
+    .querySelector(".input-date-addition")
+    .classList.add("input-date-addition-state");
+
+  document
+    .querySelector(".add-to-list-button")
+    .classList.add("add-to-list-button-state");
+});
+
+let additionalActivity;
+
+document
+  .querySelector(".generate-activity-button")
+  .addEventListener("click", () => {
+    additionalActivity = getActivity();
+
+    additionalActivity.then((activity) => {
+      document.querySelector(".label").classList.add("label-state");
+      document.querySelector(".label").innerHTML = activity;
+
+      document
+        .querySelector(".add-text-list")
+        .classList.add("add-text-list-state");
+      document.querySelector(".yes-button").classList.add("yes-button-state");
+      document.querySelector(".no-button").classList.add("no-button-state");
+    });
+  });
+
+document.querySelector(".add-to-list-button").addEventListener("click", () => {
+  additionalActivity.then((activity) => {
+    let name = activity;
+    const dateInputElement = document.querySelector(".input-date-addition");
+    const dueDate =
+      dateInputElement.value !== "" ? dateInputElement.value : "No deadline";
+
+    todoList.push({
+      name,
+      dueDate,
+    });
+
+    showSortButton();
+    renderTodoList();
+  });
 });
