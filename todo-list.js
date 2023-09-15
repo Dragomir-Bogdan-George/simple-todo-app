@@ -175,36 +175,65 @@ async function getActivity() {
   return activity;
 }
 
+function addGeneratedActivity() {
+  document
+    .querySelector(".add-to-list-button")
+    .addEventListener("click", () => {
+      additionalActivity.then((activity) => {
+        let name = activity;
+        const dateInputElement = document.querySelector(".input-date-addition");
+        const dueDate =
+          dateInputElement.value !== ""
+            ? dateInputElement.value
+            : "No deadline";
+
+        todoList.push({
+          name,
+          dueDate,
+        });
+
+        showSortButton();
+        renderTodoList();
+        saveToStorage();
+      });
+    });
+}
+
+function hideGenerateActivityContainer() {
+  document.querySelector(".no-button").addEventListener("click", () => {
+    document.querySelector(".label").classList.remove("label-state");
+    document
+      .querySelector(".add-text-list")
+      .classList.remove("add-text-list-state");
+
+    document.querySelector(".yes-button").classList.remove("yes-button-state");
+    document.querySelector(".no-button").classList.remove("no-button-state");
+
+    document
+      .querySelector(".date-of-activity")
+      .classList.remove("date-of-activity-state");
+    document
+      .querySelector(".input-date-addition")
+      .classList.remove("input-date-addition-state");
+    document
+      .querySelector(".add-to-list-button")
+      .classList.remove("add-to-list-button-state");
+  });
+}
+
 document.querySelector(".js-add-todo-button").addEventListener("click", () => {
   addTodo();
 });
 
-document.querySelector(".js-sort-button").addEventListener("click", () => {
-  sortByName();
-});
+function sortActivities() {
+  document.querySelector(".js-sort-button").addEventListener("click", () => {
+    sortByName();
+  });
 
-document.querySelector(".sort-button-date").addEventListener("click", () => {
-  sortByDate();
-});
-
-document.querySelector(".no-button").addEventListener("click", () => {
-  document.querySelector(".label").classList.remove("label-state");
-  document
-    .querySelector(".add-text-list")
-    .classList.remove("add-text-list-state");
-  document.querySelector(".yes-button").classList.remove("yes-button-state");
-  document.querySelector(".no-button").classList.remove("no-button-state");
-
-  document
-    .querySelector(".date-of-activity")
-    .classList.remove("date-of-activity-state");
-  document
-    .querySelector(".input-date-addition")
-    .classList.remove("input-date-addition-state");
-  document
-    .querySelector(".add-to-list-button")
-    .classList.remove("add-to-list-button-state");
-});
+  document.querySelector(".sort-button-date").addEventListener("click", () => {
+    sortByDate();
+  });
+}
 
 document.querySelector(".yes-button").addEventListener("click", () => {
   document
@@ -220,38 +249,34 @@ document.querySelector(".yes-button").addEventListener("click", () => {
     .classList.add("add-to-list-button-state");
 });
 
+function showGeneratedActivity() {
+  document
+    .querySelector(".generate-activity-button")
+    .addEventListener("click", () => {
+      additionalActivity = getActivity();
+
+      additionalActivity
+        .then((activity) => {
+          document.querySelector(".label").classList.add("label-state");
+          document.querySelector(".label").innerHTML = activity;
+
+          document
+            .querySelector(".add-text-list")
+            .classList.add("add-text-list-state");
+          document
+            .querySelector(".yes-button")
+            .classList.add("yes-button-state");
+          document.querySelector(".no-button").classList.add("no-button-state");
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    });
+}
+
 let additionalActivity;
 
-document
-  .querySelector(".generate-activity-button")
-  .addEventListener("click", () => {
-    additionalActivity = getActivity();
-
-    additionalActivity.then((activity) => {
-      document.querySelector(".label").classList.add("label-state");
-      document.querySelector(".label").innerHTML = activity;
-
-      document
-        .querySelector(".add-text-list")
-        .classList.add("add-text-list-state");
-      document.querySelector(".yes-button").classList.add("yes-button-state");
-      document.querySelector(".no-button").classList.add("no-button-state");
-    });
-  });
-
-document.querySelector(".add-to-list-button").addEventListener("click", () => {
-  additionalActivity.then((activity) => {
-    let name = activity;
-    const dateInputElement = document.querySelector(".input-date-addition");
-    const dueDate =
-      dateInputElement.value !== "" ? dateInputElement.value : "No deadline";
-
-    todoList.push({
-      name,
-      dueDate,
-    });
-
-    showSortButton();
-    renderTodoList();
-  });
-});
+sortActivities();
+showGeneratedActivity();
+hideGenerateActivityContainer();
+addGeneratedActivity();

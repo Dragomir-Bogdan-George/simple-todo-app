@@ -1,0 +1,33 @@
+.add-todo-button {
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 40px;
+}
+
+.delete-todo-button {
+  background-color: darkred;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 40px;
+}
+
+.initial-state,
+.initial-state-date {
+  display: none;
+  cursor: pointer;
+}
+
+.sort-state,
+.sort-state-date {
+  display: inline-block;
+  background-color: fuchsia;
+  border: none;
+  border-radius: 20px;
+}
