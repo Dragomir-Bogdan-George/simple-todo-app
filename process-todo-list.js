@@ -27,7 +27,23 @@ export function renderTodoList() {
   document.querySelector(".js-todo-list").innerHTML = todoListHTML;
 
   deleteTodo();
-  //crossRow();
+
+  document.querySelectorAll(".js-checkbox-done").forEach((checkbox, index) => {
+    checkbox.addEventListener("click", () => {
+      let itemName = document.querySelector(`.name-${index}`);
+      let itemDate = document.querySelector(`.date-${index}`);
+
+      if (checkbox.checked) {
+        itemName.classList.add("cross-text");
+        itemDate.classList.add("cross-text");
+        localStorage.setItem(`checkbox-${index}`, "checked");
+      } else {
+        itemName.classList.remove("cross-text");
+        itemDate.classList.remove("cross-text");
+        localStorage.setItem(`checkbox-${index}`, "unchecked");
+      }
+    });
+  });
 }
 
 export function showSortButton() {
@@ -82,7 +98,18 @@ function deleteTodo() {
     .forEach((deleteButton, index) => {
       deleteButton.addEventListener("click", () => {
         todoList.splice(index, 1);
+
         localStorage.removeItem(`checkbox-${index}`);
+
+        for (let i = index; i < todoList.length; i++) {
+          const isChecked = localStorage.getItem(`checkbox-${i + 1}`);
+
+          if (isChecked) {
+            localStorage.setItem(`checkbox-${i}`, isChecked);
+            localStorage.removeItem(`checkbox-${i + 1}`);
+          }
+        }
+
         showSortButton();
         renderTodoList();
         saveToStorage();
