@@ -12,9 +12,9 @@ This simple Todo-App written in JavaScript is designed to help you keep track of
 
 - **Sorting Options:** Sort your tasks by name or due date to help you stay organized.
 
-- **Random Activity Generator:** If you're feeling indecisive or need a new idea, hit the "Generate" button to fetch a random activity from the Bored API. You can choose to add it to your list or skip it.
+- **Random Activity Generator:** If you're feeling indecisive or need a new idea, hit the "Generate Activity" button to fetch a random activity from the Bored API. You can choose to add it to your list or skip it.
 
-## Getting Started
+## Getting Started (on your local machine)
 
 1. **Clone the Repository:** Start by cloning this repository to your local machine using the following command:
 
