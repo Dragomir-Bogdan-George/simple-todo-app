@@ -23,6 +23,8 @@ function sortByName() {
         todoList[index].name.toLowerCase() >
         todoList[index + 1].name.toLowerCase()
       ) {
+        sortLocalStorage(index);
+
         holdProperty = todoList[index];
         todoList[index] = todoList[index + 1];
         todoList[index + 1] = holdProperty;
@@ -53,6 +55,8 @@ function sortDates() {
   for (let iteration = 1; iteration <= todoList.length; iteration++) {
     for (let index = 0; index < todoList.length - 1; index++) {
       if (todoList[index].dueDate > todoList[index + 1].dueDate) {
+        sortLocalStorage(index);
+
         holdProperty = todoList[index];
         todoList[index] = todoList[index + 1];
         todoList[index + 1] = holdProperty;
@@ -67,4 +71,16 @@ function sortDates() {
 function sortByDate() {
   orderNoDeadlines();
   sortDates();
+}
+
+function sortLocalStorage(index) {
+  let smallItemState = localStorage.getItem(`checkbox-${index}`);
+  let bigItemState = localStorage.getItem(`checkbox-${index + 1}`);
+  let holdCheckboxProperty = smallItemState;
+
+  smallItemState = bigItemState;
+  bigItemState = holdCheckboxProperty;
+
+  localStorage.setItem(`checkbox-${index}`, smallItemState);
+  localStorage.setItem(`checkbox-${index + 1}`, bigItemState);
 }
