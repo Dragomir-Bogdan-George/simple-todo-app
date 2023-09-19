@@ -17,7 +17,7 @@ export function renderTodoList() {
     <div class="date-${index} ${
       isChecked === "checked" ? "cross-text" : ""
     }">${dueDate}</div>
-    
+
     <button class="delete-todo-button js-delete-todo-button">Delete</button>
     <input type="checkbox" class="checkbox-done js-checkbox-done" ${
       isChecked === "checked" ? "checked" : ""
@@ -29,23 +29,7 @@ export function renderTodoList() {
   document.querySelector(".js-todo-list").innerHTML = todoListHTML;
 
   deleteTodo();
-
-  document.querySelectorAll(".js-checkbox-done").forEach((checkbox, index) => {
-    checkbox.addEventListener("click", () => {
-      let itemName = document.querySelector(`.name-${index}`);
-      let itemDate = document.querySelector(`.date-${index}`);
-
-      if (checkbox.checked) {
-        itemName.classList.add("cross-text");
-        itemDate.classList.add("cross-text");
-        localStorage.setItem(`checkbox-${index}`, "checked");
-      } else {
-        itemName.classList.remove("cross-text");
-        itemDate.classList.remove("cross-text");
-        localStorage.setItem(`checkbox-${index}`, "unchecked");
-      }
-    });
-  });
+  checkItem();
 }
 
 export function showSortButton() {
@@ -147,4 +131,23 @@ function addTodo() {
   } else {
     alert("Please give a name for the activity!");
   }
+}
+
+function checkItem() {
+  document.querySelectorAll(".js-checkbox-done").forEach((checkbox, index) => {
+    checkbox.addEventListener("click", () => {
+      let itemName = document.querySelector(`.name-${index}`);
+      let itemDate = document.querySelector(`.date-${index}`);
+
+      if (checkbox.checked) {
+        itemName.classList.add("cross-text");
+        itemDate.classList.add("cross-text");
+        localStorage.setItem(`checkbox-${index}`, "checked");
+      } else {
+        itemName.classList.remove("cross-text");
+        itemDate.classList.remove("cross-text");
+        localStorage.setItem(`checkbox-${index}`, "unchecked");
+      }
+    });
+  });
 }
