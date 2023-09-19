@@ -19,5 +19,21 @@ This simple Todo-App written in JavaScript is designed to help you keep track of
 1. **Clone the Repository:** Start by cloning this repository to your local machine using the following command:
 
    ```shell
-   git clone https://github.com/your-username/todo-app.git
+   https://github.com/Dragomir-Bogdan-George/simple-todo-app.git
    ```
+
+2. **Open the HTML File:** Open the `index.html` file in your browser to launch the app.
+
+## Acknowledgements
+
+- This project makes use of the Bored API to generate random activity suggestions. Thanks to the Bored API team for their great work!
+
+- Many thanks to Simon from supersimple.dev (SuperSimpleDev on YouTube).
+
+## Application Preview
+
+![](screenshots/application-interface.png)
+
+![](screenshots/checked-item.png)
+
+![](screenshots/sorted-interface.png)
