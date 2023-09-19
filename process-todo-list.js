@@ -13,9 +13,11 @@ export function renderTodoList() {
     <div class="name-${index} ${
       isChecked === "checked" ? "cross-text" : ""
     }">${name}</div>
+
     <div class="date-${index} ${
       isChecked === "checked" ? "cross-text" : ""
     }">${dueDate}</div>
+    
     <button class="delete-todo-button js-delete-todo-button">Delete</button>
     <input type="checkbox" class="checkbox-done js-checkbox-done" ${
       isChecked === "checked" ? "checked" : ""
