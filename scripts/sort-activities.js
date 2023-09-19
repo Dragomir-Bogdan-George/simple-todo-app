@@ -1,4 +1,8 @@
-import { todoList, renderTodoList } from "./process-todo-list.js";
+import {
+  todoList,
+  renderTodoList,
+  saveToStorage,
+} from "./process-todo-list.js";
 
 export function sortActivities() {
   document.querySelector(".js-sort-button").addEventListener("click", () => {
@@ -25,6 +29,8 @@ function sortByName() {
       }
     }
   }
+
+  saveToStorage();
   renderTodoList();
 }
 
@@ -53,6 +59,8 @@ function sortDates() {
       }
     }
   }
+
+  saveToStorage();
   renderTodoList();
 }
 

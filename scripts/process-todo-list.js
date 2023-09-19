@@ -78,6 +78,10 @@ export function addActivityList() {
     });
 }
 
+export function saveToStorage() {
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+}
+
 function deleteTodo() {
   document
     .querySelectorAll(".js-delete-todo-button")
@@ -101,10 +105,6 @@ function deleteTodo() {
         saveToStorage();
       });
     });
-}
-
-function saveToStorage() {
-  localStorage.setItem("todoList", JSON.stringify(todoList));
 }
 
 function addTodo() {
